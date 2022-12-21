@@ -50,11 +50,11 @@ will be normalized to:
 
 ```sql
 SELECT
-	t1.a, t1.b, t1.c
+    t1.a, t1.b, t1.c
 FROM
-	t1
+    t1
 WHERE
-	t1.a = 1 AND t1.b = 2 AND t1.c = 3
+    t1.a = 1 AND t1.b = 2 AND t1.c = 3
 ```
 
 for better inference, input tables schema will be VERY helpful.
@@ -99,71 +99,71 @@ GROUP BY JOB_ID HAVING AVG(SALARY) <
 Output example:
 ```sql
 SELECT
-	maxavg.job_id, p.score, avg(salary)
+    maxavg.job_id, p.score, avg(salary)
 FROM
-	employees
-	LEFT JOIN (
-			SELECT
-				performance.id, performance.score
-			FROM
-				performance
-		)
-			AS p USING (id)
-	LEFT JOIN (
-			SELECT
-				max(ss.myavg), ss.job_id
-			FROM
-				(
-					SELECT
-						jobs.job_id,
-						avg(jobs.min_salary) AS myavg
-					FROM
-						jobs
-					WHERE
-						jobs.job_id
-						IN (
-								SELECT
-									job_history.job_id
-								FROM
-									job_history
-								WHERE
-									job_history.department_id BETWEEN 50 AND 100
-							)
-					GROUP BY
-						jobs.job_id
-				)
-					AS ss
-		)
-			AS maxavg ON ss.job_id = employees.job_id
+    employees
+    LEFT JOIN (
+            SELECT
+                performance.id, performance.score
+            FROM
+                performance
+        )
+            AS p USING (id)
+    LEFT JOIN (
+            SELECT
+                max(ss.myavg), ss.job_id
+            FROM
+                (
+                    SELECT
+                        jobs.job_id,
+                        avg(jobs.min_salary) AS myavg
+                    FROM
+                        jobs
+                    WHERE
+                        jobs.job_id
+                        IN (
+                                SELECT
+                                    job_history.job_id
+                                FROM
+                                    job_history
+                                WHERE
+                                    job_history.department_id BETWEEN 50 AND 100
+                            )
+                    GROUP BY
+                        jobs.job_id
+                )
+                    AS ss
+        )
+            AS maxavg ON ss.job_id = employees.job_id
 GROUP BY
-	maxavg.job_id
+    maxavg.job_id
 HAVING
-	avg(salary)
-	< (
-			SELECT
-				max(ss.myavg)
-			FROM
-				(
-					SELECT
-						jobs.job_id,
-						avg(jobs.min_salary) AS myavg
-					FROM
-						jobs
-					WHERE
-						jobs.job_id
-						IN (
-								SELECT
-									job_history.job_id
-								FROM
-									job_history
-								WHERE
-									job_history.department_id BETWEEN 50 AND 100
-							)
-					GROUP BY
-						jobs.job_id
-				)
-					AS ss
-		)
+    avg(salary)
+    < (
+            SELECT
+                max(ss.myavg)
+            FROM
+                (
+                    SELECT
+                        jobs.job_id,
+                        avg(jobs.min_salary) AS myavg
+                    FROM
+                        jobs
+                    WHERE
+                        jobs.job_id
+                        IN (
+                                SELECT
+                                    job_history.job_id
+                                FROM
+                                    job_history
+                                WHERE
+                                    job_history.department_id BETWEEN 50 AND 100
+                            )
+                    GROUP BY
+                        jobs.job_id
+                )
+                    AS ss
+        )
 ```
 </details>
 
