@@ -4,15 +4,21 @@ Pure golang SQL lineage analyzer
 
 ## Quick Start
 
+1. install:
 ```bash
 go install github.com/auxten/go-sql-lineage@latest
+```
 
-go-sql-lineage -schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},{"Name":"oper_name"}]},{"Name":"b","Cols":[{"Name":"id"},{"Name":"cert_no"},{"Name":"cust_no"}]}]' << EOF
+2. run:
+```shell
+go run main.go -schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},
+    {"Name":"oper_name"}]},{"Name":"b","Cols":[{"Name":"id"},{"Name":"cert_no"}
+        ,{"Name":"cust_no"}]}]' << EOF
 select oper_name, cert_no from a join b on a.id = b.id
 EOF
 ```
 
-output:
+3. got output:
 ```
 Normalized SQL: SELECT a.oper_name, b.cert_no FROM a JOIN b ON a.id = b.id
 SQL Refered Columns: [a.oper_name:Physical b.cert_no:Physical a.id:Physical b.id:Physical]
@@ -21,7 +27,7 @@ SQL Input Columns: [a.id:Physical a.oper_no:Physical a.oper_name:Physical b.id:P
 SQL Output Columns: [a.oper_name:Physical b.cert_no:Physical]
 ```
 
-## Usage
+## SDK Usage
 
 ### Normalize SQL
 
