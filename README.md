@@ -5,7 +5,7 @@ Pure golang SQL lineage analysis toolkit
 ## Quick Start
 
 1. install:
-```bash
+```shell
 go install github.com/auxten/go-sql-lineage@latest
 ```
 
