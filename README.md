@@ -147,13 +147,14 @@ SQL Output Columns: [comc_clerk.oper_no:Physical comc_clerk.oper_name:Physical c
 
 ### Normalize SQL
 
-Normalize SQL will:
+`NormalizeAST` will:
 
 1. Rewrite any implicit column reference to explicit column reference with best effort.
-2. Remove comments
-3. Re-indent SQL
+2. Collect the column references in the SQL.
 
-Example:
+examples see [main.go](main.go) and [normalize_test.go](lineage/normalize_test.go)
+
+Input SQL:
 
 ```sql
 SELECT a, b, c
@@ -287,10 +288,10 @@ HAVING
 
 ### Get SQL input/output tables and columns
 
-1. `GetInputColumns` will return all input columns of a SQL statement.
-1. `GetOutputColumns` will return all output columns of a SQL statement.
+- `GetInputColumns` will return all input columns of a SQL statement.
+- `GetOutputColumns` will return all output columns of a SQL statement.
 
-Example could be found in [from_test.go](lineage/from_test.go).
+Example see [main.go](main.go) and [from_test.go](lineage/from_test.go).
 
 ## Known issue
 
