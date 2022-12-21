@@ -175,3 +175,8 @@ HAVING
 1. `GetOutputColumns` will return all output columns of a SQL statement.
 
 Example could be found in [from_test.go](lineage/from_test.go).
+
+## Known issue
+
+1. star(*) is not supported yet.
+2. CTE is not supported yet.
