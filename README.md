@@ -11,7 +11,7 @@ go install github.com/auxten/go-sql-lineage@latest
 
 2. run:
 ```shell
-go run main.go -schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},
+go-sql-lineage -schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},
     {"Name":"oper_name"}]},{"Name":"b","Cols":[{"Name":"id"},{"Name":"cert_no"}
         ,{"Name":"cust_no"}]}]' << EOF
 select oper_name, cert_no from a join b on a.id = b.id
