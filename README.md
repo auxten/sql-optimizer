@@ -1,6 +1,8 @@
 # go-sql-lineage
 Pure golang SQL lineage analysis toolkit
 
+1. SQL:2011 based on [postgresql-parser](https://github.com/auxten/postgresql-parser)
+1. Very complex SQL tested, see [SQLs](test/sql/sqls.go), 65.7% test coverage 
 
 ## Quick Start
 

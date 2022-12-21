@@ -37,7 +37,7 @@ func TestGetProvidedColumns(t *testing.T) {
 				},
 			},
 			sql.SQLNestedSubquery,
-			"[employees.job_id employees.salary p.id p.score maxavg.max(myavg) maxavg.job_id]",
+			"[employees.job_id:Physical employees.salary:Physical p.id:Physical p.score:Physical maxavg.max(myavg):Unknown maxavg.job_id:Unknown]",
 			"[employees p maxavg]",
 		},
 		{
@@ -53,7 +53,7 @@ func TestGetProvidedColumns(t *testing.T) {
 				},
 			},
 			sql.SQLUnion,
-			"[type contactname city country]",
+			"[type:Unknown contactname:Physical city:Physical country:Physical]",
 			"[]",
 		},
 		{
@@ -96,7 +96,7 @@ func TestGetProvidedColumns(t *testing.T) {
 				},
 			},
 			sql.SQLmj,
-			"[clerk.rowid clerk.oper_no clerk.oper_name clerk.cert_no clerk.oper_no cifo.rowid cifo.cert_no cifo.cust_no basic.cust_no basic.acct_no basic.unnecessary acct.sub_code acct.acct_no acct.acct_bal]",
+			"[clerk.rowid:Physical clerk.oper_no:Physical clerk.oper_name:Physical clerk.cert_no:Physical clerk.oper_no:Physical cifo.rowid:Physical cifo.cert_no:Physical cifo.cust_no:Physical basic.cust_no:Physical basic.acct_no:Physical basic.unnecessary:Physical acct.sub_code:Physical acct.acct_no:Physical acct.acct_bal:Physical]",
 			"[clerk cifo basic acct]",
 		},
 	}
