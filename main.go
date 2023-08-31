@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/auxten/go-sql-lineage/lineage"
+	"github.com/auxten/sql-optimizer/lineage"
 	"github.com/auxten/postgresql-parser/pkg/sql/parser"
 	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
 )

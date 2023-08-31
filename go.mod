@@ -1,4 +1,4 @@
-module github.com/auxten/go-sql-lineage
+module github.com/auxten/sql-optimizer
 
 go 1.18
 

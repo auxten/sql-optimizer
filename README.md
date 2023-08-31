@@ -1,19 +1,27 @@
-# go-sql-lineage
-Pure golang SQL lineage analysis toolkit
+# SQL Optimizer
+
+ANSI SQL optimizer toolkit, only works on SQL and AST level.
+Only a little bit of Logical Plan optimization, no Physical Plan involved
+Database schema is required for better inference.
+
+## Features
 
 1. SQL:2011 based on [postgresql-parser](https://github.com/auxten/postgresql-parser)
 1. Very complex SQL tested, see [SQLs](test/sql/sqls.go), 65.7% test coverage 
+1. SQL normalization supported
+1. SQL input/output tables and columns inference supported
+1. Further optimization is under development🚧
 
 ## Quick Start
 
 1. install:
 ```shell
-go install github.com/auxten/go-sql-lineage@latest
+go install github.com/auxten/sql-optimizer@latest
 ```
 
 2. run:
 ```shell
-go-sql-lineage -schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},
+sql-optimizer-schema '[{"Name":"a","Cols":[{"Name":"id"},{"Name":"oper_no"},
     {"Name":"oper_name"}]},{"Name":"b","Cols":[{"Name":"id"},{"Name":"cert_no"}
         ,{"Name":"cust_no"}]}]' << EOF
 select oper_name, cert_no from a join b on a.id = b.id
@@ -34,7 +42,7 @@ SQL Output Columns: [a.oper_name:Physical b.cert_no:Physical]
 
 Input example:
 ```shell
-go-sql-lineage -schema '[{"Name":"COMC_CLERK","Cols":[{"Name":"rowid"},{"Name":"oper_no"},{"Name":"oper_name"},{"Name":"cert_no"},{"Name":"oper_no"}]},{"Name":"comr_cifbinfo","Cols":[{"Name":"rowid"},{"Name":"cert_no"},{"Name":"cust_no"}]},{"Name":"savb_basicinfo","Cols":[{"Name":"rowid"},{"Name":"cust_no"},{"Name":"acct_no"},{"Name":"unnecessary"}]},{"Name":"savb_acctinfo_chk","Cols":[{"Name":"rowid"},{"Name":"sub_code"},{"Name":"acct_no"},{"Name":"acct_bal"}]}]' << EOF
+sql-optimizer -schema '[{"Name":"COMC_CLERK","Cols":[{"Name":"rowid"},{"Name":"oper_no"},{"Name":"oper_name"},{"Name":"cert_no"},{"Name":"oper_no"}]},{"Name":"comr_cifbinfo","Cols":[{"Name":"rowid"},{"Name":"cert_no"},{"Name":"cust_no"}]},{"Name":"savb_basicinfo","Cols":[{"Name":"rowid"},{"Name":"cust_no"},{"Name":"acct_no"},{"Name":"unnecessary"}]},{"Name":"savb_acctinfo_chk","Cols":[{"Name":"rowid"},{"Name":"sub_code"},{"Name":"acct_no"},{"Name":"acct_bal"}]}]' << EOF
     SELECT                                   
         CLERK.OPER_NO               OPER_NO
     ,   CLERK.OPER_NAME             OPER_NAME

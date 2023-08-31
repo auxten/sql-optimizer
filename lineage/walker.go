@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/auxten/go-sql-lineage/utils"
+	"github.com/auxten/sql-optimizer/utils"
 	"github.com/auxten/postgresql-parser/pkg/sql/parser"
 	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
 	log "github.com/sirupsen/logrus"

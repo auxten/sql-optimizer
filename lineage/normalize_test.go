@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/auxten/go-sql-lineage/test/sql"
-	"github.com/auxten/go-sql-lineage/utils"
+	"github.com/auxten/sql-optimizer/test/sql"
+	"github.com/auxten/sql-optimizer/utils"
 	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
 	log "github.com/sirupsen/logrus"
 	. "github.com/smartystreets/goconvey/convey"
